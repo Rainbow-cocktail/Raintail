@@ -1,13 +1,1226 @@
-/* About Page Styles - 交互式卡片设计 */
+/* About Page Styles - Bento Grid 便当盒布局 */
 
-/* ===== About Main Container ===== */
+/* ===== 页面基础设置 ===== */
 .about-page {
-  min-height: calc(100vh - 60px);
+  min-height: 100vh;
   background: var(--background-color);
-  padding: 60px 0 40px;
+  padding: 60px 0;
+  position: relative;
+}
+
+.about-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ===== 头部区域 ===== */
+.about-header {
+  text-align: center;
+  margin-bottom: 60px;
+  animation: fadeInDown 0.8s ease;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.about-avatar {
+  width: 150px;
+  height: 150px;
+  margin: 0 auto 25px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 4px solid var(--border-color, rgba(0, 0, 0, 0.1));
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  transition: all 0.4s ease;
+}
+
+.about-avatar:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+}
+
+.about-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.about-name {
+  font-size: 3rem;
+  margin-bottom: 15px;
+  color: var(--text-color);
+  font-weight: 700;
+}
+
+.about-bio {
+  font-size: 1.3rem;
+  color: var(--secondary-color);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* ===== Bento Grid 布局 ===== */
+.dynamic-cards-area {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-auto-rows: minmax(240px, auto);
+  gap: 20px;
+  animation: fadeInUp 1s ease 0.3s both;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== 通用卡片样式 ===== */
+.mbti-card,
+.career-card,
+.motto-card,
+.games-card,
+.music-card {
+  background: var(--card-background);
+  border-radius: 24px;
+  overflow: hidden;
+  position: relative;
+  padding: 30px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border: 1px solid var(--border-color, rgba(0, 0, 0, 0.05));
+}
+
+.mbti-card:hover,
+.career-card:hover,
+.motto-card:hover,
+.games-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+/* 卡片TAG标签 */
+.card-tag {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  opacity: 0.6;
+  margin-bottom: 15px;
+  display: block;
+  font-weight: 600;
+}
+
+/* ===== 1. MBTI卡片 (占3列) ===== */
+.mbti-card {
+  grid-column: span 3;
+  min-height: 280px;
+  position: relative;
+  overflow: hidden;
+  background: #667eea; /* 备用纯色背景 */
+}
+
+/* MBTI背景图片 */
+.mbti-card .card-bg-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  z-index: 0;
+}
+
+.mbti-card > * {
+  position: relative;
+  z-index: 2;
+}
+
+.mbti-type {
+  font-size: 3.5rem;
+  font-weight: 900;
+  margin-bottom: 10px;
+  letter-spacing: 2px;
+}
+
+.mbti-name {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  opacity: 0.95;
+  font-weight: 600;
+}
+
+.mbti-description {
+  font-size: 1rem;
+  opacity: 0.85;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.mbti-traits {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.trait-tag {
+  padding: 8px 16px;
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  font-size: 0.85rem;
+}
+
+.mbti-link {
+  display: inline-block;
+  padding: 10px 24px;
+  text-decoration: none;
+  border-radius: 25px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  align-self: flex-start;
+}
+
+/* ===== 2. 生涯历程 (占3列) ===== */
+.career-card {
+  grid-column: span 3;
+  min-height: 280px;
+}
+
+.career-card .card-tag {
+  color: var(--accent-color);
+}
+
+.career-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.timeline-item {
+  position: relative;
+  padding-left: 30px;
+  border-left: 2px solid var(--accent-color);
+  padding-bottom: 10px;
+}
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -6px;
+  top: 5px;
+  width: 10px;
+  height: 10px;
+  background: var(--accent-color);
+  border-radius: 50%;
+}
+
+.timeline-period {
+  font-size: 0.85rem;
+  color: var(--accent-color);
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.timeline-title {
+  font-size: 1.3rem;
+  color: var(--text-color);
+  margin-bottom: 5px;
+  font-weight: 700;
+}
+
+.timeline-subtitle {
+/* ===== 3. 座右铭 (占3列) ===== */
+.motto-card {
+  grid-column: span 3;
+  min-height: 280px;
+  position: relative;
+  overflow: hidden;
+  background: #f093fb;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 座右铭背景图片 */
+.motto-card .card-bg-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  z-index: 0;
+}
+
+.motto-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+}
+
+.motto-card .card-tag {
+  align-self: flex-start;
+  margin-bottom: 20px;
+}
+
+.motto-text {
+  font-size: 2rem;
+  line-height: 1.4;
+  margin-bottom: 15px;
+  font-weight: 700;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.motto-author {
+  font-size: 1rem;
+  opacity: 0.95;
+  font-style: italic;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+} font-size: 2rem;
+  line-height: 1.4;
+  margin-bottom: 15px;
+  font-weight: 700;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.motto-author {
+  font-size: 1rem;
+  opacity: 0.95;
+  font-style: italic;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* ===== 4. 游戏世界 (占6列,内部3列网格) ===== */
+.games-card {
+  grid-column: span 6;
+}
+
+.games-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.game-item {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  height: 280px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.game-item:hover {
+  transform: translateY(-5px);
+}
+
+.game-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.5s ease;
+}
+
+.game-item:hover .game-image {
+  transform: scale(1.1);
+}
+
+.game-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, transparent 50%, rgba(0, 0, 0, 0.8) 100%);
+  z-index: 1;
+}
+
+.game-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20px;
+  z-index: 2;
+  color: white;
+}
+
+.game-name {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+  line-height: 1.3;
+}
+
+.game-quote {
+  font-size: 0.85rem;
+  opacity: 0.9;
+  line-height: 1.4;
+}
+
+.game-quote {
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+/* ===== 联系方式 ===== */
+.contact-section {
+  margin-top: 50px;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 2rem;
+  color: var(--text-color);
+  margin-bottom: 30px;
+  font-weight: 700;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.contact-card {
+  background: var(--card-background);
+  padding: 25px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  text-decoration: none;
+  color: var(--text-color);
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border: 1px solid var(--border-color, rgba(0, 0, 0, 0.05));
+}
+
+.contact-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12);
+}
+
+.contact-card i {
+  font-size: 2rem;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--accent-color);
+  color: white;
+  border-radius: 50%;
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.contact-label {
+  font-size: 0.8rem;
+  color: var(--secondary-color);
+}
+
+.contact-value {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+/* ===== 响应式设计 ===== */
+@media (max-width: 968px) {
+  .dynamic-cards-area {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .games-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .about-page {
+    padding: 40px 0;
+  }
+
+  .about-container {
+    padding: 15px;
+  }
+
+  .dynamic-cards-area {
+    grid-template-columns: 1fr;
+    grid-auto-rows: auto;
+  }
+
+  .mbti-card,
+  .career-card,
+  .motto-card,
+  .games-card,
+  .music-card {
+    grid-column: span 1 !important;
+    min-height: 250px;
+  }
+
+  .games-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about-name {
+    font-size: 2.2rem;
+  }
+
+  .about-bio {
+    font-size: 1.1rem;
+  }
+}
+
+.about-page::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(circle at 20% 50%, var(--accent-color-alpha) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, var(--accent-color-alpha) 0%, transparent 50%);
+  pointer-events: none;
+  opacity: 0.3;
+}
+
+.about-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ===== 头部区域 ===== */
+.about-header {
+  text-align: center;
+  margin-bottom: 60px;
+  animation: fadeInDown 0.8s ease;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.about-avatar {
+  width: 150px;
+  height: 150px;
+  margin: 0 auto 25px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 5px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+  transition: all 0.4s ease;
+  position: relative;
+}
+
+.about-avatar::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transform: rotate(45deg);
+  animation: shine 3s infinite;
+}
+
+@keyframes shine {
+  0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+  100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+}
+
+.about-avatar:hover {
+  transform: translateY(-10px) scale(1.05);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.about-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.about-name {
+  font-size: 3rem;
+  margin-bottom: 15px;
+  color: var(--text-color);
+  font-weight: 700;
+}
+
+.about-bio {
+  font-size: 1.3rem;
+  color: var(--secondary-color);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* ===== 灵动卡片区域 ===== */
+.dynamic-cards-area {
+  display: grid;
+  gap: 30px;
+  animation: fadeInUp 1s ease 0.3s both;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 通用卡片样式 */
+.skill-wall-card,
+/* 通用卡片样式 */
+.skill-wall-card,
+.mbti-card,
+.career-card,
+.motto-card,
+.games-card,
+.music-card {
+  background: var(--card-background);
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--border-color, rgba(0, 0, 0, 0.05));
+}skill-wall-card:hover,
+.career-card:hover,
+.games-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.3);
+}
+
+.card-title {
+.card-title {
+  font-size: 2rem;
+  margin-bottom: 30px;
+  color: var(--text-color);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.card-title i {
+  color: var(--accent-color);
+  font-size: 2.2rem;
+}
+/* ===== 1. 技能图标墙 ===== */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(110px, 110px));
+  gap: 20px;
+  justify-content: start;
+}
+
+.skill-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 15px;
+  background: #f5f7fa;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  min-height: 110px;
+  max-height: 140px;
+}
+
+/* 暗黑模式支持 */
+[data-theme="dark"] .skill-item {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.skill-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  transition: left 0.5s ease;
+}
+
+.skill-item:hover::before {
+  left: 100%;
+}
+
+.skill-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.skill-icon {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+}
+
+.skill-item:hover .skill-icon {
+  transform: rotateY(360deg);
+}
+
+.skill-name {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-color);
+  text-align: center;
+  line-height: 1.2;
+  word-break: break-word;
+}
+
+/* ===== 2. MBTI 性格卡片 ===== */
+.mbti-card {
+  color: #fff;
+  text-align: center;
   position: relative;
   overflow: hidden;
 }
+
+.mbti-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+  animation: rotate 20s linear infinite;
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.mbti-content {
+  position: relative;
+  z-index: 1;
+}
+
+.mbti-type {
+  font-size: 4rem;
+  font-weight: 900;
+  margin-bottom: 15px;
+  text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
+  letter-spacing: 3px;
+}
+
+.mbti-name {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.mbti-description {
+  font-size: 1.2rem;
+  margin-bottom: 25px;
+  opacity: 0.95;
+  line-height: 1.6;
+}
+
+.mbti-traits {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin-bottom: 25px;
+}
+
+.trait-tag {
+  padding: 10px 20px;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  border-radius: 25px;
+  font-size: 1rem;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  transition: all 0.3s ease;
+}
+
+.trait-tag:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.05);
+}
+
+.mbti-link {
+  display: inline-block;
+  padding: 12px 30px;
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 30px;
+  font-weight: 600;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  transition: all 0.3s ease;
+}
+
+.mbti-link:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* ===== 3. 生涯时间线 ===== */
+.career-timeline {
+  position: relative;
+  padding-left: 40px;
+}
+
+.career-timeline::before {
+  content: '';
+  position: absolute;
+  left: 15px;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(to bottom, #667eea, #764ba2);
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 40px;
+  padding-left: 30px;
+  animation: slideInLeft 0.6s ease both;
+}
+
+.timeline-item:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.timeline-icon {
+  position: absolute;
+  left: -25px;
+  top: 5px;
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 1.2rem;
+  box-shadow: 0 4px 10px rgba(102, 126, 234, 0.4);
+}
+.timeline-period {
+  color: var(--accent-color);
+  font-weight: 700;
+  font-size: 1rem;
+  margin-bottom: 8px;
+}
+
+.timeline-title {
+  font-size: 1.5rem;
+  color: var(--text-color);
+  margin-bottom: 5px;
+  font-weight: 600;
+}
+
+.timeline-subtitle {
+  color: var(--secondary-color);
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+  font-style: italic;
+}
+
+.timeline-description {
+  color: var(--secondary-color);
+  line-height: 1.6;
+} line-height: 1.6;
+}
+
+/* ===== 4. 座右铭卡片 ===== */
+.motto-card {
+  color: #fff;
+  text-align: center;
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.motto-content {
+  position: relative;
+  z-index: 1;
+}
+
+.quote-icon {
+  font-size: 3rem;
+  opacity: 0.3;
+  margin-bottom: 20px;
+}
+
+.motto-text {
+  font-size: 2rem;
+  line-height: 1.5;
+  margin-bottom: 20px;
+  font-weight: 600;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.motto-author {
+  font-size: 1.2rem;
+  opacity: 0.9;
+  font-style: italic;
+}
+
+/* ===== 5. 游戏卡片 ===== */
+.games-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+}
+
+.game-item {
+  border-radius: 15px;
+  overflow: hidden;
+  position: relative;
+  height: 300px;
+  transition: all 0.4s ease;
+  cursor: pointer;
+}
+
+.game-item:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+}
+
+.game-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.5s ease;
+}
+
+.game-item:hover .game-image {
+  transform: scale(1.1);
+}
+
+.game-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 25px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+  color: #fff;
+  transform: translateY(50px);
+  transition: transform 0.4s ease;
+}
+
+.game-item:hover .game-info {
+  transform: translateY(0);
+}
+
+.game-name {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.game-quote {
+  font-size: 1rem;
+  opacity: 0.9;
+  line-height: 1.4;
+}
+
+/* ===== 6. 音乐卡片 ===== */
+.music-card {
+  color: #fff;
+  position: relative;
+}
+
+.music-content {
+  position: relative;
+  z-index: 1;
+}
+
+.music-title {
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.music-description {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+  opacity: 0.95;
+  line-height: 1.6;
+}
+
+.music-playlists {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.playlist-item {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  padding: 20px;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  transition: all 0.3s ease;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.playlist-item:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-5px);
+}
+
+.playlist-item i {
+  font-size: 2rem;
+}
+
+.playlist-info {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.playlist-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.playlist-count {
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+.music-link {
+  display: inline-block;
+  padding: 12px 30px;
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 30px;
+  font-weight: 600;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  transition: all 0.3s ease;
+}
+
+.music-link:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* ===== 联系方式区域 ===== */
+.contact-section {
+  margin-top: 60px;
+  animation: fadeInUp 1s ease 0.6s both;
+}
+.section-title {
+  text-align: center;
+  font-size: 2.5rem;
+  color: var(--text-color);
+  margin-bottom: 40px;
+  font-weight: 600;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 25px;
+}
+
+.contact-card {
+  background: var(--card-background);
+  padding: 30px;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  text-decoration: none;
+  color: var(--text-color);
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--border-color, rgba(0, 0, 0, 0.05));
+}
+
+.contact-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+.contact-card i {
+  font-size: 2.5rem;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--accent-color);
+  color: #fff;
+  border-radius: 50%;
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.contact-label {
+  font-size: 0.9rem;
+  color: var(--secondary-color);
+}
+
+.contact-value {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-color);
+} color: #2c3e50;
+}
+
+/* ===== 响应式设计 ===== */
+@media (max-width: 768px) {
+  .about-page {
+    padding: 40px 0;
+  }
+
+  .about-container {
+    padding: 15px;
+  }
+
+  .about-name {
+    font-size: 2.2rem;
+  }
+
+  .about-bio {
+    font-size: 1.1rem;
+  }
+
+  .skill-wall-card,
+  .mbti-card,
+  .career-card,
+  .motto-card,
+  .games-card,
+  .music-card {
+    padding: 25px;
+  }
+
+  .card-title {
+    font-size: 1.6rem;
+  }
+
+  .skills-grid {
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 15px;
+  }
+
+  .mbti-type {
+    font-size: 3rem;
+  }
+
+  .motto-text {
+    font-size: 1.5rem;
+  }
+
+  .music-title {
+    font-size: 2rem;
+  }
+
+  .games-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 
 .about-page::before {
   content: '';
@@ -542,4 +1755,106 @@
   .card-hover-content {
     padding: 15px 20px;
   }
+}
+
+/* ===== 深色模式适配 ===== */
+/* 在浅色模式(白天模式)下,渐变背景卡片使用深色文字 */
+/* 在深色模式(黑夜模式)下,渐变背景卡片使用白色文字 */
+
+/* 默认浅色模式: MBTI卡片深色文字 */
+body:not(.dark-mode) .mbti-card {
+  color: #2c3e50 !important;
+}
+
+body:not(.dark-mode) .mbti-card .card-tag {
+  color: rgba(0, 0, 0, 0.7) !important;
+}
+
+body:not(.dark-mode) .mbti-type {
+  color: #1a1a2e !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+body:not(.dark-mode) .mbti-name {
+  color: #2c3e50 !important;
+}
+
+body:not(.dark-mode) .mbti-description {
+  color: #34495e !important;
+}
+
+body:not(.dark-mode) .trait-tag {
+  background: rgba(0, 0, 0, 0.15);
+  color: #2c3e50 !important;
+  border-color: rgba(0, 0, 0, 0.2);
+}
+
+body:not(.dark-mode) .mbti-link {
+  background: rgba(0, 0, 0, 0.15);
+  color: #2c3e50 !important;
+  border-color: rgba(0, 0, 0, 0.2);
+}
+
+body:not(.dark-mode) .mbti-link:hover {
+  background: rgba(0, 0, 0, 0.25);
+}
+
+/* 深色模式: MBTI卡片白色文字 */
+body.dark-mode .mbti-card {
+  color: white !important;
+}
+
+body.dark-mode .mbti-card .card-tag {
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+
+body.dark-mode .mbti-type {
+  color: white !important;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .mbti-name {
+/* 座右铭卡片 - 浅色模式深色文字,深色模式白色文字 */
+body:not(.dark-mode) .motto-card {
+  color: #2c3e50 !important;
+}
+
+body:not(.dark-mode) .motto-card .card-tag {
+  color: rgba(0, 0, 0, 0.7) !important;
+}
+
+body:not(.dark-mode) .motto-text {
+  color: #1a1a2e !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+body:not(.dark-mode) .motto-author {
+  color: #34495e !important;
+}
+
+body.dark-mode .motto-card {
+  color: white !important;
+}
+
+body.dark-mode .motto-card .card-tag {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+body.dark-mode .motto-text {
+  color: white !important;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .motto-author {
+  color: rgba(255, 255, 255, 0.95) !important;
+}
+
+body.dark-mode .mbti-link {
+  background: rgba(255, 255, 255, 0.2);
+  color: white !important;
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+body.dark-mode .mbti-link:hover {
+  background: rgba(255, 255, 255, 0.3);
 }
