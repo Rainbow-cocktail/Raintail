@@ -4,7 +4,7 @@
 :root {
   --text-color: #2c3e50;
   --card-background: #ffffff;
-  --accent-color: #667eea;
+  --accent-color: #ff7a70;
   --border-color: #e0e0e0;
   --shadow-light: rgba(0, 0, 0, 0.1);
   --shadow-medium: rgba(0, 0, 0, 0.15);
@@ -97,7 +97,7 @@
   font-size: 0.85rem;
   font-weight: 600;
   color: #fff;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: #ff7a70;
   padding: 6px 14px;
   border-radius: 20px;
   margin-bottom: 15px;
@@ -120,7 +120,7 @@
 /* ===== 1. MBTI 卡片 (span-3) ===== */
 .mbti-card {
   grid-column: span 3;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: #ff7a70;
   color: #fff;
   display: flex;
   flex-direction: column;
@@ -224,7 +224,7 @@
   top: 5px;
   width: 12px;
   height: 12px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: #ff7a70;
   border-radius: 50%;
   border: 3px solid #fff;
   box-shadow: 0 0 0 2px var(--accent-color);
@@ -263,6 +263,75 @@
   color: #5d6d7e;
   line-height: 1.5;
   margin: 0;
+}
+
+/* ===== 3. 对象卡片 (span-6) ===== */
+.partner-card {
+  grid-column: span 6;
+  min-height: 320px;
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(240px, 1fr);
+  align-items: center;
+  gap: 34px;
+}
+
+.partner-photo-wrap {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #f3f5f8;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.04);
+}
+
+.partner-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.partner-info {
+  min-width: 0;
+}
+
+.partner-name {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--text-color);
+  margin: 8px 0 12px;
+}
+
+.partner-desc {
+  font-size: 1rem;
+  color: #5d6d7e;
+  line-height: 1.7;
+  margin: 0 0 18px;
+}
+
+.partner-details {
+  display: grid;
+  gap: 10px;
+}
+
+.partner-detail {
+  display: grid;
+  grid-template-columns: 58px 1fr;
+  gap: 10px;
+  align-items: baseline;
+}
+
+.partner-label {
+  color: #7f8c8d;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.partner-value {
+  color: var(--text-color);
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.5;
 }
 
 /* ===== 3. 游戏爱好卡片 (span-6) ===== */
@@ -352,7 +421,7 @@
   display: block;
   width: 60px;
   height: 4px;
-  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+  background: #ff7a70;
   margin: 15px auto 0;
   border-radius: 2px;
 }
@@ -388,7 +457,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: #ff7a70;
   border-radius: 12px;
   margin-right: 20px;
   flex-shrink: 0;
@@ -467,7 +536,8 @@ body:not(.dark-mode) .mbti-card .card-tag {
   }
   
   .mbti-card,
-  .career-card {
+  .career-card,
+  .partner-card {
     grid-column: span 4;
   }
   
@@ -504,9 +574,14 @@ body:not(.dark-mode) .mbti-card .card-tag {
   
   .mbti-card,
   .career-card,
+  .partner-card,
   .games-card {
     grid-column: span 1;
     min-height: auto;
+  }
+
+  .partner-card {
+    grid-template-columns: 1fr;
   }
   
   .games-grid {
